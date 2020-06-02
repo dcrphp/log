@@ -15,7 +15,6 @@
     "require": {
         "php": "^7.0",
         "monolog/monolog": "*",
-        "dcrphp/config": "*",
-        "graylog2/gelf-php": "*"
+        "dcrphp/config": "*"
     }
 }
