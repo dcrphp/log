@@ -1,0 +1,21 @@
+{
+    "name": "dcrphp/log",
+    "description": "日志类",
+    "authors": [
+        {
+            "name": "HuanJun Huang"
+        }
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "DcrPHP\\Log\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "monolog/monolog": "*",
+        "dcrphp/config": "*",
+        "graylog2/gelf-php": "*"
+    }
+}
