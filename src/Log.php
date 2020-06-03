@@ -27,9 +27,9 @@ class Log
         $this->config = current($clsConfig->get());
     }
 
-    public function addHandle($handleName)
+    public function addHandler($handleName)
     {
-        $lh = new LogHandle();
+        $lh = new LogHandler();
         $lh->setConfig($this->config);
         $lh->setName($handleName);
         $cls = $lh->init();

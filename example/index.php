@@ -9,8 +9,8 @@ ini_set('display_errors', 'on');
 $clsLog = new Log();
 //$clsLog->setConfig(array('file' => array('path' => 'log')));
 $clsLog->setConfigFile('config.php');
-$clsLog->addHandle('graylog'); //记录在file中
+$clsLog->addHandler('graylog'); //记录在file中
 //$clsLog->addHandle('mongodb'); //记录在mongodb中
 $clsLog->init();
 //写日志
-$clsLog->warning('Information message', ['user' => get_current_user()]);
+$clsLog->warning('my message', ['user' => get_current_user()]);

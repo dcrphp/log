@@ -7,7 +7,7 @@ use Monolog\Handler\GelfHandler;
 use Monolog\Handler\RedisHandler;
 use Monolog\Handler\StreamHandler;
 
-class LogHandle
+class LogHandler
 {
     private $config;
     private $handleName;
