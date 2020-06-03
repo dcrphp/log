@@ -1,7 +1,0 @@
-[2020-06-02T12:12:53.525705+08:00] name.WARNING: Array [] []
-[2020-06-02T12:15:02.071648+08:00] log.WARNING: Array [] []
-[2020-06-02T12:59:15.873251+08:00] log.INFO: Array [] []
-[2020-06-02T13:08:54.827416+08:00] log.INFO: Array [] []
-[2020-06-02T13:11:44.617678+08:00] log.INFO: Information message {"user":"AUSU"} []
-[2020-06-02T13:12:11.490121+08:00] log.WARNING: Information message {"user":"AUSU"} []
-[2020-06-02T15:50:56.888165+08:00] log.WARNING: Information message {"user":"AUSU"} []
