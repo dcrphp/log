@@ -36,8 +36,22 @@ class Log
         $this->handleList[] = $cls;
     }
 
+    /**
+     * 检查配置
+     * @throws \Exception
+     */
+    public function checkConfig()
+    {
+        $config = $this->config;
+        if(empty($config['channel']))
+        {
+            throw new \Exception('can not find the channel');
+        }
+    }
+
     public function init()
     {
+        $this->checkConfig();
         $this->clsMonolog = new Logger($this->config['channel']);
         if (!$this->handleList) {
             throw new \Exception('can not find handle');
