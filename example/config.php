@@ -21,4 +21,5 @@ return array(
     //要用graylog,则要引入:graylog2/gelf-php.
     //这个ip和port请在graylog中的 System/inputs->inputs 新建一个gelf udp就OK了，记得端口配置在下面
     'graylog'=> array('host'=>'10.10.30.217','port'=>'12201'),
+    'chrome'=> array('type'=>'chrome'),
 );
