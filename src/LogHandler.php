@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DcrPHP\Log;
 
+use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\ChromePHPHandler;
 use Monolog\Handler\GelfHandler;
 use Monolog\Handler\RedisHandler;
@@ -49,8 +50,8 @@ class LogHandler
     public function getHandle($config)
     {
         switch ($this->handleName) {
-            case 'chrome':
-                $handle = new ChromePHPHandler();
+            case 'browser':
+                $handle = new BrowserConsoleHandler();
                 break;
             case 'graylog':
                 $transport = new \Gelf\Transport\UdpTransport($config['host']);
