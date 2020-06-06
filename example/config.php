@@ -2,7 +2,7 @@
 return array(
     'channel' => 'log',
     //频道名 一般定义为系统名
-    'file' => array('path' => 'log.log'),
+    'file' => array('path' => 'log/log.log'),
     //directory为日志生成在path目录下， general为day则按天 hour按时 month按月 minute按分，prefix为日志文件后缀默认为log
     'directory' => array('path' => 'log', 'prefix' => 'php', 'general' => 'hour'),
     'mongodb' => array(
