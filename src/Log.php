@@ -6,7 +6,6 @@ namespace DcrPHP\Log;
 use DcrPHP\Config\Config;
 use Monolog\Handler\AbstractSyslogHandler;
 use Monolog\Logger;
-use mysql_xdevapi\Warning;
 
 class Log
 {
@@ -51,6 +50,10 @@ class Log
         $clsConfig->setDriver('php');//解析php格式的
         $clsConfig->init();
         $this->config = current($clsConfig->get());
+        if($this->config['driver'])
+        {
+            $this->addHandler($this->config['driver']);
+        }
     }
 
     /**
