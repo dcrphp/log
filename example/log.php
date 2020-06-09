@@ -6,7 +6,7 @@ return array(
     //频道名 一般定义为系统名
     'channel' => 'log',
     //要用什么存系统日志  用户日志用的是mongodb
-    'driver'=>'file',
+    'driver'=>'log',
 
     'file' => array('path' => 'log/log.log'),
     //directory为日志生成在path目录下， general为day则按天 hour按时 month按月 minute按分，prefix为日志文件后缀默认为log

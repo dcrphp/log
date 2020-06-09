@@ -9,19 +9,22 @@ ini_set('display_errors', 'on');
 //系统日志
 $clsSystemLogger = new SystemLogger('log.php'); //配置文件
 //$clsSystemLogger->addHandler('mongodb');//除了配置里的driver 还要额外记，请在这里加
+$clsSystemLogger->setTitle('标题内容-' . time());
 $clsSystemLogger->setLogInfo(
     array(
-        'ack' => 1, //1或0 这是成功还是失败
-        'level' => 'info', //warning info debug notice critical emergency
-        'add_time' => '2020-06-05 12:12:12',
-        'message' => '日志主体',
-        'source' => '日志来源:dcrphp',
+        'ack' => 0, //1或0 这是成功还是失败
+        'level' => 'critical', //warning info debug notice critical emergency
+        'add_time' => date('Y-m-d H:i:s'),
+        'message' => 1,
+        'source' => 'dcrphp-error',
+        'line'=> 2,
+        'file'=> 3,
     )
 );
 $clsSystemLogger->notice();
 exit;
 
-//用户日志
+//用户日志 只用mongodb
 $clsUserLogger = new UserLogger('log_user', 'log.php'); //集合名,配置路径 格式看log.php案例 用户日志要配置好mongodb
 //$clsUserLogger = new UserLogger('log_user','config.php');//使用config.php的配置
 $clsUserLogger->setLogInfo(

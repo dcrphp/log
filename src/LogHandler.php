@@ -54,7 +54,7 @@ class LogHandler
                 $handle = new BrowserConsoleHandler();
                 break;
             case 'graylog':
-                $transport = new \Gelf\Transport\UdpTransport($config['host']);
+                $transport = new \Gelf\Transport\UdpTransport($config['host'], $config['port']);
                 $publisher = new \Gelf\Publisher();
                 $publisher->addTransport($transport);
                 //print_r($publisher);

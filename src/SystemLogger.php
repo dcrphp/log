@@ -18,7 +18,31 @@ class SystemLogger
      * @var
      */
     private $logInfo;
+    /**
+     * 日志实例
+     * @var Log
+     */
     private $clsLog;
+    /**
+     * @var 日志标题
+     */
+    private $title;
+
+    /**
+     * @return 日志标题
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
     public function __construct($configPath)
     {
@@ -68,6 +92,6 @@ class SystemLogger
      */
     public function __call($method, $args)
     {
-        return call_user_func_array([$this->clsLog, $method], array('日志',$this->logInfo));
+        return call_user_func_array([$this->clsLog, $method], array($this->getTitle() ?? '日志', $this->logInfo));
     }
 }

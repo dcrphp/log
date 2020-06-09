@@ -15,6 +15,6 @@
     "require": {
         "php": "^7.0",
         "monolog/monolog": "*",
-        "dcrphp/config": "*"
+        "dcrphp/config": "1.0.2-alpha1"
     }
 }
