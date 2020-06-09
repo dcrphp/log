@@ -16,17 +16,11 @@ class Log
     /**
      * Log constructor.
      * @param $configPath 配置文件
-     * @param string[] $handlerNameList 日志处理handler 默认是文件
      * @throws \Exception
      */
-    public function __construct( $configPath, $handlerNameList = array('file') )
+    public function __construct( $configPath )
     {
         $this->setConfigFile($configPath);
-        foreach($handlerNameList as $handlerName)
-        {
-            $this->addHandler($handlerName);
-        }
-        $this->init();
     }
 
     /**
@@ -40,12 +34,12 @@ class Log
 
     /**
      * 配置文件
-     * @param $config
+     * @param $configPath
      * @throws \Exception
      */
-    public function setConfigFile($config)
+    public function setConfigFile($configPath)
     {
-        $clsConfig = new Config($config);
+        $clsConfig = new Config($configPath);
         $clsConfig->setDriver('php');//解析php格式的
         $clsConfig->init();
         $this->config = current($clsConfig->get());

@@ -47,9 +47,12 @@ class SystemLogger
     public function __construct($configPath)
     {
         //初始化
-        $clsLog = new Log($configPath);
-        $clsLog->init();
-        $this->clsLog = $clsLog;
+        try {
+            $clsLog = new Log($configPath);
+            $clsLog->init();
+            $this->clsLog = $clsLog;
+        } catch (\Exception $e) {
+        }
     }
 
     public function addHandler($handlerName)

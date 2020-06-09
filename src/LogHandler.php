@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DcrPHP\Log;
 
+use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Handler\BrowserConsoleHandler;
 use Monolog\Handler\ChromePHPHandler;
 use Monolog\Handler\GelfHandler;
@@ -12,7 +13,7 @@ use Monolog\Handler\StreamHandler;
 class LogHandler
 {
     private $config;
-    private $handleName;
+    private $handlerName;
 
     /**
      * @param mixed $config
@@ -22,82 +23,47 @@ class LogHandler
         $this->config = $config;
     }
 
-    public function setName($handelName)
+    public function setName($handlerName)
     {
-        $this->handleName = $handelName;
+        $this->handlerName = $handlerName;
     }
 
+    /**
+     * 初始化好handler返回给使用者
+     * @return MongoDBHandler|BrowserConsoleHandler|GelfHandler|RedisHandler|StreamHandler|void|null
+     * @throws \Exception
+     */
     public function init()
     {
-        $config = $this->config[$this->handleName];
+        $config = $this->config[$this->handlerName];
         //查看配置
         if (!$config) {
-            throw new \Exception('config can not find:' . $this->handleName);
+            throw new \Exception('config can not find:' . $this->handlerName);
             return;
         }
-        $handle = null;
+        $handler = null;
         try {
-            $handle = $this->getHandle($config);
+            $handler = $this->getHandler($config);
         } catch (\Exception $e) {
         }
-        return $handle;
+        return $handler;
     }
 
     /**
      * 通过配置来获取handle
      * @param $config
      */
-    public function getHandle($config)
+    public function getHandler($config)
     {
-        switch ($this->handleName) {
-            case 'browser':
-                $handle = new BrowserConsoleHandler();
-                break;
-            case 'graylog':
-                $transport = new \Gelf\Transport\UdpTransport($config['host'], $config['port']);
-                $publisher = new \Gelf\Publisher();
-                $publisher->addTransport($transport);
-                //print_r($publisher);
-
-                $handle = new GelfHandler($publisher);
-                break;
-            case 'file':
-                $handle = new StreamHandler($config['path']);
-                break;
-            case 'mongodb':
-                $client = new \MongoDB\Driver\Manager("mongodb://{$config['host']}:{$config['port']}");
-                $handle = new MongoDBHandler($client, $config['database'], $config['collection']);
-                break;
-            case 'redis':
-                $client = new \Redis();
-                $client->connect($config['host'], $config['port']);
-                if ($config['password']) {
-                    $client->auth($config['password']);
-                }
-                $handle = new RedisHandler($client, $config['key']);
-                break;
-            case 'directory':
-                $path = $config['path'] . DIRECTORY_SEPARATOR;
-                $prefix = $config['prefix'] ? $config['prefix'] : 'log';
-                if ('day' == $config['general']) {
-                    $path .= date('Y-m-d');
-                }
-                if ('month' == $config['general']) {
-                    $path .= date('Y-m');
-                }
-                if ('minute' == $config['general']) {
-                    $path .= date('Y-m-d-H-i');
-                }
-                if ('hour' == $config['general']) {
-                    $path .= date('Y-m-d-H');
-                }
-                $path .= '.' . $prefix;
-                $handle = new StreamHandler($path);
-                break;
-            default:
-                throw new \Exception('invalid handle:' . $this->handleName);
-                break;
+        //转给handler去处理
+        $handlerClass = "\\DcrPHP\\Log\\Handler\\" . ucfirst($this->handlerName);
+        $handler = new $handlerClass;
+        $handler->setConfig($config);
+        $clsHandler = $handler->init();
+        if( ! $clsHandler instanceof AbstractProcessingHandler)
+        {
+            throw new \Exception('没有可用handler');
         }
-        return $handle;
+        return $clsHandler;
     }
 }
