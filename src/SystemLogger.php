@@ -83,13 +83,13 @@ class SystemLogger
     }
 
     /**
+     * 调用日志核心类的方法
      * @method warning
      * @method info
      * @method debug
      * @method notice
      * @method critical
      * @method emergency
-     * 调用日志核心类的方法
      * @param $method
      * @param $args
      * @return mixed
