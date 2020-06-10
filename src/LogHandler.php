@@ -23,7 +23,7 @@ class LogHandler
         $this->config = $config;
     }
 
-    public function setName($handlerName)
+    public function setHandlerName($handlerName)
     {
         $this->handlerName = $handlerName;
     }
@@ -45,6 +45,7 @@ class LogHandler
         try {
             $handler = $this->getHandler($config);
         } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
         return $handler;
     }

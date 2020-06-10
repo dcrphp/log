@@ -8,7 +8,7 @@ ini_set('display_errors', 'on');
 
 //系统日志
 $clsSystemLogger = new SystemLogger('log.php'); //配置文件
-//$clsSystemLogger->addHandler('mongodb');//除了配置里的driver 还要额外记，请在这里加
+//$clsSystemLogger->addHandler('file');//添加额外的处理
 $clsSystemLogger->setTitle('标题内容-' . time());
 $clsSystemLogger->setLogInfo(
     array(

@@ -43,9 +43,9 @@ class Log
         $clsConfig->setDriver('php');//解析php格式的
         $clsConfig->init();
         $this->config = current($clsConfig->get());
-        if($this->config['driver'])
+        if($this->config['handler'])
         {
-            $this->addHandler($this->config['driver']);
+            $this->addHandler($this->config['handler']);
         }
     }
 
@@ -58,7 +58,7 @@ class Log
     {
         $lh = new LogHandler();
         $lh->setConfig($this->config);
-        $lh->setName($handlerName);
+        $lh->setHandlerName($handlerName);
         $cls = $lh->init();
         $this->handlerList[] = $cls;
     }
@@ -85,7 +85,7 @@ class Log
         $this->checkConfig();
         $this->clsMonolog = new Logger($this->config['channel']);
         if (!$this->handlerList) {
-            throw new \Exception('can not find handle');
+            throw new \Exception('can not find handler');
         }
 
         foreach ($this->handlerList as $handler) {

@@ -52,6 +52,7 @@ class SystemLogger
             $clsLog->init();
             $this->clsLog = $clsLog;
         } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 
