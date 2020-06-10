@@ -69,7 +69,7 @@ class SystemLogger
     {
         $this->logInfo = $logInfo;
         if (!$this->checkLogInfoFormat()) {
-            throw new \Exception('日志信息有问题，请查看wiki下的规范要求');
+            throw new \Exception('日志信息有问题，请查看wiki下的规范要求，日志不允许有file');
         }
     }
 
@@ -79,7 +79,7 @@ class SystemLogger
      */
     private function checkLogInfoFormat()
     {
-        return isset($this->logInfo['ack']) && isset($this->logInfo['level']) && isset($this->logInfo['add_time']) && isset($this->logInfo['message']) && isset($this->logInfo['source']);
+        return isset($this->logInfo['ack']) && isset($this->logInfo['level']) && isset($this->logInfo['add_time']) && isset($this->logInfo['message']) && isset($this->logInfo['source']) && ! isset($this->logInfo['file']);
     }
 
     /**

@@ -18,7 +18,7 @@ $clsSystemLogger->setLogInfo(
         'message' => 1,
         'source' => 'dcrphp-error',
         'line'=> 2,
-        'file'=> 3,
+        'file_name'=> 3,
     )
 );
 $clsSystemLogger->notice();
