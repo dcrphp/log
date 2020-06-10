@@ -49,7 +49,7 @@ class SystemLogger
         //初始化
         try {
             $clsLog = new Log($configPath);
-            $clsLog->init();
+            //$clsLog->init();
             $this->clsLog = $clsLog;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
@@ -93,9 +93,11 @@ class SystemLogger
      * @param $method
      * @param $args
      * @return mixed
+     * @throws \Exception
      */
     public function __call($method, $args)
     {
+        $this->clsLog->init();
         return call_user_func_array([$this->clsLog, $method], array($this->getTitle() ?? '日志', $this->logInfo));
     }
 }

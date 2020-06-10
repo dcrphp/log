@@ -84,9 +84,9 @@ class Log
     {
         $this->checkConfig();
         $this->clsMonolog = new Logger($this->config['channel']);
-        if (!$this->handlerList) {
+        /*if (!$this->handlerList) {
             throw new \Exception('can not find handler');
-        }
+        }*/
 
         foreach ($this->handlerList as $handler) {
             $this->clsMonolog->pushHandler($handler);
