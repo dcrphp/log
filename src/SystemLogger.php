@@ -58,7 +58,11 @@ class SystemLogger
 
     public function addHandler($handlerName)
     {
-        $this->clsLog->addHandler($handlerName);
+        try {
+            $this->clsLog->addHandler($handlerName);
+        } catch (\Exception $e) {
+            throw $e;
+        }
     }
 
     /**
@@ -68,18 +72,29 @@ class SystemLogger
     public function setLogInfo($logInfo)
     {
         $this->logInfo = $logInfo;
-        if (!$this->checkLogInfoFormat()) {
-            throw new \Exception('日志信息有问题，请查看wiki下的规范要求，日志不允许有file');
+        $checkResult = $this->checkLogInfoFormat();
+        if (!$checkResult['ack']) {
+            throw new \Exception('日志信息有问题,以下字段缺失:' . $checkResult['msg']);
         }
     }
 
     /**
      * 检测日志格式
-     * @return bool
+     * @return array
      */
     private function checkLogInfoFormat()
     {
-        return isset($this->logInfo['ack']) && isset($this->logInfo['level']) && isset($this->logInfo['add_time']) && isset($this->logInfo['message']) && isset($this->logInfo['source']) && ! isset($this->logInfo['file']);
+        $result = 1;
+        $loss = '';
+        $checkList = array('ack', 'level', 'add_time', 'message', 'source');
+        foreach ($checkList as $checkStr) {
+            if (!isset($this->logInfo[$checkStr])) {
+                $result = 0;
+                $loss .= $checkStr . ',';
+            }
+        }
+
+        return array('ack' => $result, 'msg' => $loss);
     }
 
     /**
