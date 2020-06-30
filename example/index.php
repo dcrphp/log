@@ -22,6 +22,7 @@ $clsSystemLogger->setLogInfo(
     )
 );
 $clsSystemLogger->notice();
+echo '系统日志记录完成，请查看log/log.php';
 exit;
 
 //用户日志 只用mongodb
