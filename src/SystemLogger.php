@@ -56,6 +56,11 @@ class SystemLogger
         }
     }
 
+    public function setConfig($config)
+    {
+        $this->clsLog->setConfig($config);
+    }
+
     /**
      * @param mixed $logInfo
      * @throws \Exception
