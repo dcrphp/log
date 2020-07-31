@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace DcrPHP\Log;
 
 use DcrPHP\Config\Config;
-use Monolog\Handler\AbstractSyslogHandler;
 use Monolog\Logger;
 
 class Log
@@ -15,12 +14,14 @@ class Log
 
     /**
      * Log constructor.
-     * @param $configPath 配置文件
+     * @param string $configPath 配置文件
      * @throws \Exception
      */
-    public function __construct( $configPath )
+    public function __construct($configPath = '')
     {
-        $this->setConfigFile($configPath);
+        if ($configPath) {
+            $this->setConfigFile($configPath);
+        }
     }
 
     /**

@@ -44,7 +44,7 @@ class SystemLogger
         $this->title = $title;
     }
 
-    public function __construct($configPath)
+    public function __construct($configPath = '')
     {
         //初始化
         try {
@@ -56,21 +56,13 @@ class SystemLogger
         }
     }
 
-    public function addHandler($handlerName)
-    {
-        try {
-            $this->clsLog->addHandler($handlerName);
-        } catch (\Exception $e) {
-            throw $e;
-        }
-    }
-
     /**
      * @param mixed $logInfo
      * @throws \Exception
      */
     public function setLogInfo($logInfo)
     {
+
         $this->logInfo = $logInfo;
         $checkResult = $this->checkLogInfoFormat();
         if (!$checkResult['ack']) {
