@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DcrPHP\Log;
@@ -11,8 +12,7 @@ class Log
     private $config = array();
     private $handlerList = array();
     private $clsMonolog;
-
-    /**
+/**
      * Log constructor.
      * @param string $configPath 配置文件
      * @throws \Exception
@@ -41,11 +41,11 @@ class Log
     public function setConfigFile($configPath)
     {
         $clsConfig = new Config($configPath);
-        $clsConfig->setDriver('php');//解析php格式的
+        $clsConfig->setDriver('php');
+//解析php格式的
         $clsConfig->init();
         $this->config = current($clsConfig->get());
-        if($this->config['handler'])
-        {
+        if ($this->config['handler']) {
             $this->addHandler($this->config['handler']);
         }
     }
@@ -71,8 +71,7 @@ class Log
     public function checkConfig()
     {
         $config = $this->config;
-        if(empty($config['channel']))
-        {
+        if (empty($config['channel'])) {
             throw new \Exception('can not find the channel');
         }
     }
@@ -85,7 +84,7 @@ class Log
     {
         $this->checkConfig();
         $this->clsMonolog = new Logger($this->config['channel']);
-        /*if (!$this->handlerList) {
+/*if (!$this->handlerList) {
             throw new \Exception('can not find handler');
         }*/
 

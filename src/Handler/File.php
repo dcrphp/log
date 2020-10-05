@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace DcrPHP\Log\Handler;
 
@@ -19,8 +19,7 @@ class File extends Handler
     }
     public function init()
     {
-        if( ! $this->checkConfig() )
-        {
+        if (! $this->checkConfig()) {
             throw new \Exception('配置不存在或配置有问题');
         }
         $config = $this->getConfig();

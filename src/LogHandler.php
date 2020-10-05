@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DcrPHP\Log;
@@ -14,8 +15,7 @@ class LogHandler
 {
     private $config;
     private $handlerName;
-
-    /**
+/**
      * @param mixed $config
      */
     public function setConfig($config)
@@ -36,7 +36,7 @@ class LogHandler
     public function init()
     {
         $config = $this->config[$this->handlerName];
-        //查看配置
+//查看配置
         if (!$config) {
             throw new \Exception('config can not find:' . $this->handlerName);
             return;
@@ -58,11 +58,10 @@ class LogHandler
     {
         //转给handler去处理
         $handlerClass = "\\DcrPHP\\Log\\Handler\\" . ucfirst($this->handlerName);
-        $handler = new $handlerClass;
+        $handler = new $handlerClass();
         $handler->setConfig($config);
         $clsHandler = $handler->init();
-        if( ! $clsHandler instanceof AbstractProcessingHandler)
-        {
+        if (! $clsHandler instanceof AbstractProcessingHandler) {
             throw new \Exception('没有可用handler');
         }
         return $clsHandler;

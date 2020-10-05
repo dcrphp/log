@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace DcrPHP\Log;
 
@@ -18,21 +18,18 @@ class UserLogger
      * @var
      */
     private $logInfo;
-
-    /**
+/**
      * 集合
      * @var
      */
     private $collection;
     private $config;
-
-    /**
+/**
      * mongodb实例
      * @var
      */
     private $mongodbInstance;
-
-    /**
+/**
      * @param mixed $logInfo
      * @throws \Exception
      */
@@ -59,7 +56,7 @@ class UserLogger
         $config = $this->config['mongodb'];
         $auth = $config['username'] && $config['username'] ? "{$config['username']}:{$config['username']}@" : "";
         $uri = "mongodb://{$auth}{$config['host']}:{$config['port']}";
-        //echo $uri;
+//echo $uri;
 
         //连接mongodb
         $this->mongodbInstance = new \MongoDB\Driver\Manager($uri);
@@ -86,7 +83,8 @@ class UserLogger
     {
         $clsConfig = new Config();
         $clsConfig->addFile($configPath);
-        $clsConfig->setDriver('php');//解析php格式的
+        $clsConfig->setDriver('php');
+//解析php格式的
         $clsConfig->init();
         $this->config = current($clsConfig->get());
         if (!$this->checkConfigFormat()) {
@@ -104,10 +102,10 @@ class UserLogger
     public function save()
     {
         //开始存
-        $bulk = new \MongoDB\Driver\BulkWrite;
+        $bulk = new \MongoDB\Driver\BulkWrite();
         $bulk->insert($this->logInfo);
         $config = $this->config['mongodb'];
-        //var_dump(  );
+//var_dump(  );
         return $this->mongodbInstance->executeBulkWrite("{$config['database']}.{$this->collection}", $bulk);
     }
 
@@ -125,14 +123,10 @@ class UserLogger
         }
         $filter = $where;
         $start = ($page - 1) * $list_num;
-
         $options = array('limit' => $list_num, 'skip' => $start, 'sort' => $order);
-
         $config = $this->config['mongodb'];
-
         $query = new \MongoDB\Driver\Query($filter, $options);
         $list = $this->mongodbInstance->executeQuery("{$config['database']}.{$this->collection}", $query);
-
         $arr = array();
         foreach ($list as $document) {
             array_push($arr, (array)$document);

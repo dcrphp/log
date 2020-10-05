@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace DcrPHP\Log\Handler;
 
@@ -24,7 +24,6 @@ class Directory extends Handler
             throw new \Exception('配置不存在或配置有问题');
         }
         $config = $this->getConfig();
-
         $path = $config['path'] . DIRECTORY_SEPARATOR;
         $prefix = $config['prefix'] ? $config['prefix'] : 'log';
         $general = $config['general'] ? $config['general'] : 'day';
@@ -41,7 +40,6 @@ class Directory extends Handler
             $path .= date('Y-m-d-H');
         }
         $path .= '.' . $prefix;
-
         return new StreamHandler($path);
     }
 }

@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace DcrPHP\Log\Handler;
 
@@ -19,20 +19,16 @@ class Redis extends Handler
     }
     public function init()
     {
-        if( ! $this->checkConfig() )
-        {
+        if (! $this->checkConfig()) {
             throw new \Exception('配置不存在或配置有问题');
         }
         $config = $this->getConfig();
-
         $client = new \Redis();
-
         $client->connect($config['host'], $config['port']);
         if ($config['password']) {
             $client->auth($config['password']);
         }
         $handle = new RedisHandler($client, $config['key']);
-
         $client = new \MongoDB\Driver\Manager("mongodb://{$config['host']}:{$config['port']}");
         return new RedisHandler($client, $config['key']);
     }

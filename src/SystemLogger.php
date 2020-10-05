@@ -1,9 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-
 namespace DcrPHP\Log;
-
 
 /**
  * 系统的日志
@@ -18,17 +17,16 @@ class SystemLogger
      * @var
      */
     private $logInfo;
-    /**
+/**
      * 日志实例
      * @var Log
      */
     private $clsLog;
-    /**
+/**
      * @var 日志标题
      */
     private $title;
-
-    /**
+/**
      * @return 日志标题
      */
     public function getTitle()
@@ -49,7 +47,7 @@ class SystemLogger
         //初始化
         try {
             $clsLog = new Log($configPath);
-            //$clsLog->init();
+//$clsLog->init();
             $this->clsLog = $clsLog;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());

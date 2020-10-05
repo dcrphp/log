@@ -1,6 +1,6 @@
 <?php
-declare(strict_types=1);
 
+declare(strict_types=1);
 
 namespace DcrPHP\Log\Handler;
 
@@ -19,8 +19,7 @@ class Graylog extends Handler
     }
     public function init()
     {
-        if( ! $this->checkConfig() )
-        {
+        if (! $this->checkConfig()) {
             throw new \Exception('配置不存在或配置有问题');
         }
 
@@ -28,7 +27,7 @@ class Graylog extends Handler
         $transport = new \Gelf\Transport\UdpTransport($config['host'], $config['port']);
         $publisher = new \Gelf\Publisher();
         $publisher->addTransport($transport);
-        //print_r($publisher);
+//print_r($publisher);
 
         return new GelfHandler($publisher);
     }

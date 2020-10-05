@@ -16,5 +16,8 @@
         "php": "^7.0",
         "monolog/monolog": "*",
         "dcrphp/config": "*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5"
     }
 }

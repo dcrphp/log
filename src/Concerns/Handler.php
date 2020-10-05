@@ -21,7 +21,6 @@ abstract class Handler
     {
         $this->config = $config;
     }
-    public abstract function checkConfig();
-    public abstract function init();
-
+    abstract public function checkConfig();
+    abstract public function init();
 }
