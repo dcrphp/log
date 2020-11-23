@@ -60,6 +60,16 @@ class SystemLogger
     }
 
     /**
+     * 给日志添加handler
+     * @param $handlerName
+     * @throws \Exception
+     */
+    public function addHandler($handlerName)
+    {
+        $this->clsLog->addHandler($handlerName);
+    }
+
+    /**
      * @param mixed $logInfo
      * @throws \Exception
      */
